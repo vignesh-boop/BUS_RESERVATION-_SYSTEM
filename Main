@@ -1,0 +1,40 @@
+package com.BusReservation;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		 Scanner s = new Scanner(System.in);
+		 ArrayList<Bus> buses = new ArrayList<Bus>();
+		 ArrayList<Booking>bookings = new ArrayList<Booking>();
+		 buses.add(new Bus(1,true,10));
+		 buses.add(new Bus(2,false,20));
+		 buses.add(new Bus(3,true,30));
+		int userinp =1;
+		for(Bus b :buses) {
+			b.displaybusinfo();
+		}
+		while(userinp == 1) {
+			System.out.println("ENTER 1 TO BOOK 2 FOR EXIT");
+			userinp = s.nextInt();
+			if(userinp == 1) {
+				Booking booking = new Booking();
+				if(booking.ifAvailable(bookings,buses)) {
+					bookings.add(booking);
+					System.out.println("YOUR BOOKING IS COMFRIMED");
+				}else {
+					System.out.print("BUS SEATS ARE FULL PLEASE TRY ANOTHER BUS");
+				}
+			}
+			else if(userinp ==2) {
+				System.exit(0);
+			}
+		}
+	
+		
+
+	}
+
+}
