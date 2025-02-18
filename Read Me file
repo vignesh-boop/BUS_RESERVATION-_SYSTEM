@@ -1,0 +1,125 @@
+1. Class: Bus
+This class represents the details of a bus, including its number, whether it is an AC bus, and its seating capacity.
+
+Attributes:
+int busNo — Bus number.
+boolean ac — Whether the bus has AC or not.
+int capacity — Total seat capacity of the bus.
+Constructor:
+java
+Copy
+Edit
+public Bus(int busNo, boolean ac, int capacity)
+This initializes the bus details using the provided parameters.
+
+Methods:
+getBusNo() — Returns the bus number.
+setBusNo(int busNo) — Sets the bus number.
+isAc() — Returns if the bus has AC.
+setAc(boolean ac) — Sets the AC status.
+getCapacity() — Returns the bus capacity.
+setCapacity(int capacity) — Sets the bus capacity.
+displaybusinfo() — Displays the bus number, AC status, and capacity.
+Example:
+java
+Copy
+Edit
+buses.add(new Bus(1, true, 10));   // Bus no. 1, AC, Capacity 10
+buses.add(new Bus(2, false, 20));  // Bus no. 2, Non-AC, Capacity 20
+2. Class: Booking
+This class handles the booking process for a passenger.
+
+Attributes:
+String passengerName — Name of the passenger.
+int busno — Bus number for the booking.
+Date date — Date of travel.
+Constructor:
+java
+Copy
+Edit
+Booking()
+Prompts the user for passengerName, busno, and date.
+Uses SimpleDateFormat to parse the date in dd-MM-yyyy format.
+Scanner is used for input.
+Methods:
+java
+Copy
+Edit
+public boolean isAvailable(ArrayList<Bus> buses, ArrayList<Booking> bookings)
+Checks seat availability by:
+Looping through all buses to find the matching bus number.
+Getting the capacity of that bus.
+Counting the number of bookings on the same bus and date.
+Returning true if available, otherwise false.
+Potential Issues:
+The date comparison uses ==, which compares object references instead of values. It should be replaced with .equals():
+java
+Copy
+Edit
+if (b.busno == busno && b.date.equals(date)) {
+In Main class, there is a typo:
+java
+Copy
+Edit
+if(booking.ifAvailable(bookings, buses))
+should be:
+java
+Copy
+Edit
+if(booking.isAvailable(buses, bookings))
+3. Class: Main
+This is the entry point of the program where the booking process is handled.
+
+Key Features:
+Initializes ArrayList for buses and bookings.
+Adds sample bus data.
+Displays the bus information.
+Continuously prompts the user to either book a ticket or exit.
+Flow:
+Displays available buses using displaybusinfo().
+Prompts the user to enter:
+1 for booking
+2 for exit
+If booking:
+A Booking object is created.
+Checks availability using isAvailable().
+If available, adds the booking and confirms the ticket.
+If not, displays a message that seats are full.
+Example:
+yaml
+Copy
+Edit
+ENTER THE PASSENGER NAME : Vignesh
+ENTER THE BUSNO : 1
+ENTER THE DATE : 18-02-2025
+YOUR BOOKING IS CONFIRMED
+4. Program Flow and Functionality:
+User inputs the passenger name, bus number, and date.
+The system checks the availability of seats on the specified bus and date.
+If available, the booking is confirmed, and the details are stored.
+If not available, the user is prompted to try another bus.
+5. Improvements and Recommendations:
+Date Comparison:
+
+Use .equals() for date comparison instead of ==.
+Input Validation:
+
+Add checks to ensure that the bus number exists and the date format is correct.
+Performance Optimization:
+
+Move int counts = 0; outside the first loop to avoid resetting the counter for each bus.
+Code Refactoring:
+
+Minor typo in Main class (ifAvailable → isAvailable).
+Exception Handling:
+
+Handle potential input errors, such as invalid date formats or non-integer bus numbers.
+6. Overall Review:
+The code is well-structured and clearly demonstrates Object-Oriented Programming principles.
+It uses ArrayLists efficiently for storing buses and bookings.
+The logic for seat availability is correctly implemented but needs minor optimizations.
+This is a good implementation of a basic Bus Reservation System with scope for enhancements like:
+
+Adding more bus details (e.g., price, route).
+Allowing cancellation of bookings.
+Displaying booked and available seats in real-time.
